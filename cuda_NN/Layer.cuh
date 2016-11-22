@@ -45,6 +45,10 @@ private:
 
 	double bias;
 
+	double *d_a;
+	double *d_b;
+	double *d_res;
+
 	double activationFunc(double value) const;
 	double activeationFuncD(double value) const;
 
@@ -52,6 +56,8 @@ private:
 	void calcGradients(const std::shared_ptr<Layer> &prevLayer);
 
 	double *matmul(const double *inputs) const;
+	void normalizeWeights();
+	std::tuple<double, double> min_max() const;
 	void initDeltaWeights();
 
 };

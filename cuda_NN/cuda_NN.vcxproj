@@ -153,14 +153,18 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />
     <CudaCompile Include="Layer.cu" />
+    <CudaCompile Include="Layer_GPU.cu" />
+    <CudaCompile Include="Net.cu" />
+    <CudaCompile Include="Net_GPU.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer.cuh" />
-    <ClInclude Include="Net.h" />
+    <ClInclude Include="Layer_GPU.cuh" />
+    <ClInclude Include="Net.cuh" />
+    <ClInclude Include="Net_GPU.cuh" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Net.cpp" />
     <ClCompile Include="Utilities.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
