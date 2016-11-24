@@ -317,6 +317,7 @@ void Layer_GPU::BackPropagation_GPU(const double *inputs)
 {
 	calcGradients_GPU(inputs);
 }
+
 void Layer_GPU::BackPropagation_GPU(const std::shared_ptr<Layer_GPU> &prevLayer)
 {
 	calcGradients_GPU(prevLayer);

@@ -1,0 +1,6 @@
+\frametitle{Updating the weights}
+\begin{verbatim}
+auto deltaWeight = trainRate * d_activationResults[idx]
+   * d_gradients[idx] + momentum * oldDeltaWeight;
+d_weights[i] += d_deltaWeights[i];
+\end{verbatim}
