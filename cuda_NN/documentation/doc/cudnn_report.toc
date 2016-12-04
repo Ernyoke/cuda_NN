@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Problem description}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Fully-connected feed-forward neural MLP net}{3}{subsection.1.2}
+\contentsline {section}{\numberline {2}Solution}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Related work}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Serial implementation}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Parallel implementation of the feed-forward step}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Parallel implementation of the backpropagation step}{6}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Memory management - Naive approach}{7}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Memory management - Optimized approach}{7}{subsection.2.6}
+\contentsline {section}{\numberline {3}Benchmarks}{7}{section.3}
+\contentsline {section}{\numberline {4}Conclusion}{7}{section.4}
+\contentsline {section}{\numberline {5}References}{7}{section.5}

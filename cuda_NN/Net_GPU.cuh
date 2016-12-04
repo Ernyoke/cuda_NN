@@ -10,10 +10,10 @@ class Net_GPU
 public:
 
 	Net_GPU();
-	~Net_GPU() {};
+	~Net_GPU();
 
 	void AddLayer(std::shared_ptr<Layer_GPU> layer);
-	void Train_GPU(const double* inputs, const double *targets);
+	void Train_GPU(unsigned inputPos);
 	const double* Activate_GPU(const double *inputs);
 
 	void SetTrainRate(double trainRate);
@@ -21,7 +21,16 @@ public:
 
 	double GetError() const;
 
+	void InitInputs(double **inputs, double **targets, unsigned n, unsigned inputSize, unsigned targetSize);
+
 private:
+
+	double **inputs;
+	double **targets;
+	unsigned nrInputs;
+	unsigned inputSize;
+	unsigned targetSize;
+
 	std::vector< std::shared_ptr<Layer_GPU> > layers;
 	double trainRate;
 	double momentum;

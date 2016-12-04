@@ -19,9 +19,9 @@ Layer::Layer(const unsigned nrInputs, const unsigned nrNeurons) : nrInputs(nrInp
 
 	initDeltaWeights();
 
-	utils::CheckError(cudaMalloc((void**)&d_a, nrInputs * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMalloc((void**)&d_b, sizeW * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMalloc((void**)&d_res, nrNeurons * sizeof(double)), __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_a, nrInputs * sizeof(double)), __FILE__, __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_b, sizeW * sizeof(double)), __FILE__, __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_res, nrNeurons * sizeof(double)), __FILE__, __LINE__);
 }
 
 Layer::~Layer()
@@ -53,7 +53,7 @@ void Layer::InitWeights()
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<> dis(0.1, 1.0);
+	std::uniform_real_distribution<> dis(-1.0, 1.0);
 	for (auto i = 0; i < static_cast<decltype(i)>(sizeW); ++i)
 	{
 		this->weights[i] = dis(gen);
@@ -123,7 +123,7 @@ void Layer::BackPropagation(const std::shared_ptr<Layer> &prevLayer)
 	//UpdateWeights();
 }
 
-/*
+
 double Layer::activationFunc(double value) const
 {
 	auto res = 1.0 / (1.0 + std::exp(-value));
@@ -134,8 +134,9 @@ double Layer::activeationFuncD(double value) const
 {
 	auto s = activationFunc(value);
 	return s * (1.0 - s);
-}*/
+}
 
+/*
 double Layer::activationFunc(double value) const
 {
 	auto res = (exp(value) - exp(-value)) / (exp(value) + exp(-value));
@@ -151,6 +152,7 @@ double Layer::activeationFuncD(double value) const
 	auto s = activationFunc(value);
 	return (1.0 - s * s);
 }
+*/
 
 double* Layer::matmul(const double* inputs) const
 {
@@ -216,7 +218,7 @@ void Layer::UpdateWeights()
 		deltaWeights[i] = newDeltaWeight;
 		weights[i] += deltaWeights[i];
 	}
-	normalizeWeights();
+	//normalizeWeights();
 }
 
 std::tuple<double, double> Layer::min_max() const
@@ -239,15 +241,17 @@ std::tuple<double, double> Layer::min_max() const
 }
 
 
-void Layer::normalizeWeights()
+void Layer::normalizeWeights() const
 {
+	auto a = -1.0;
+	auto b = 1.0;
 	auto mm = min_max();
 	auto min = std::get<0>(mm);
 	auto max = std::get<1>(mm);
 	if (max != min) {
 		for (auto i = 0; i < static_cast<decltype(i)>(sizeW); ++i)
 		{
-			weights[i] = (weights[i] - min) / (max - min);
+			weights[i] = a + (b - a) * (weights[i] - min) / (max - min);
 		}
 	}
 }
@@ -305,17 +309,17 @@ void Layer::FeedForward_GPU(const double* inputs)
 	//delete the old array with the activations
 	delete[] activationResult;
 
-	utils::CheckError(cudaMemcpy(d_a, inputs, nrInputs * sizeof(double), cudaMemcpyHostToDevice), __LINE__);
-	utils::CheckError(cudaMemcpy(d_b, weights, sizeW * sizeof(double), cudaMemcpyHostToDevice), __LINE__);
+	utils::CheckError(cudaMemcpy(d_a, inputs, nrInputs * sizeof(double), cudaMemcpyHostToDevice), __FILE__, __LINE__);
+	utils::CheckError(cudaMemcpy(d_b, weights, sizeW * sizeof(double), cudaMemcpyHostToDevice), __FILE__, __LINE__);
 
 	dim3 grids(32, 32, 1);
 	dim3 blocks(32, 32, 1);
 
 	matmul_cu << < grids, blocks >> > (d_a, d_b, d_res, 1, nrInputs, nrInputs, nrNeurons, 1, nrNeurons);
-	utils::CheckError(cudaGetLastError(), __LINE__);
+	utils::CheckError(cudaGetLastError(), __FILE__, __LINE__);
 
 	activationResult = new double[nrNeurons];
-	utils::CheckError(cudaMemcpy(activationResult, d_res, nrNeurons * sizeof(double), cudaMemcpyDeviceToHost), __LINE__);
+	utils::CheckError(cudaMemcpy(activationResult, d_res, nrNeurons * sizeof(double), cudaMemcpyDeviceToHost), __FILE__, __LINE__);
 
 	for (auto i = 0; i < static_cast<decltype(i)>(nrNeurons); ++i)
 	{

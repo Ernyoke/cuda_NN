@@ -14,10 +14,10 @@
 
 Layer_GPU::Layer_GPU(const unsigned nrInputs, const unsigned nrNeurons) : nrInputs(nrInputs), nrNeurons(nrNeurons), sizeW((nrInputs) * (nrNeurons)), trainRate(0.1), momentum(0.1), bias(1.0)
 {
-	utils::CheckError(cudaMalloc((void**)&d_weights, sizeW * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMalloc((void**)&d_deltaWeights, sizeW * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMalloc((void**)&d_activationResult, nrNeurons * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMalloc((void**)&d_gradients, nrNeurons * sizeof(double)), __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_weights, sizeW * sizeof(double)), __FILE__, __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_deltaWeights, sizeW * sizeof(double)), __FILE__, __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_activationResult, nrNeurons * sizeof(double)), __FILE__, __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_gradients, nrNeurons * sizeof(double)), __FILE__, __LINE__);
 
 	initDeltaWeights();
 }
@@ -40,12 +40,12 @@ void Layer_GPU::InitWeights()
 	auto weights = new double[sizeW];
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<> dis(0.1, 1.0);
+	std::uniform_real_distribution<> dis(-1.0, 1.0);
 	for (auto i = 0; i < static_cast<decltype(i)>(sizeW); ++i)
 	{
 		weights[i] = dis(gen);
 	}
-	utils::CheckError(cudaMemcpy(d_weights, weights, sizeW * sizeof(double), cudaMemcpyHostToDevice), __LINE__);
+	utils::CheckError(cudaMemcpy(d_weights, weights, sizeW * sizeof(double), cudaMemcpyHostToDevice), __FILE__, __LINE__);
 	delete[] weights;
 }
 
@@ -56,7 +56,7 @@ void Layer_GPU::initDeltaWeights()
 	{
 		deltaWeights[i] = 0;
 	}
-	utils::CheckError(cudaMemcpy(d_deltaWeights, deltaWeights, sizeW * sizeof(double), cudaMemcpyHostToDevice), __LINE__);
+	utils::CheckError(cudaMemcpy(d_deltaWeights, deltaWeights, sizeW * sizeof(double), cudaMemcpyHostToDevice), __FILE__, __LINE__);
 	delete[] deltaWeights;
 }
 
@@ -87,55 +87,59 @@ unsigned Layer_GPU::OutputSize() const
 //------------------------------------------------------------------------
 __device__ double cuda_activationFunc(double value)
 {
-	auto res = (exp(value) - exp(-value)) / (exp(value) + exp(-value));
+	auto res = 1.0 / (1.0 + std::exp(-value));
 	return res;
 }
 
 __device__ double cuda_activeationFuncD(double value)
 {
 	auto s = cuda_activationFunc(value);
-	return (1.0 - s * s);
+	return s * (1.0 - s);
 }
 
-__global__ void cuda_matmul(const double* A, const double* B, double* C, int ARows, int ACols, int BRows, int BCols, int CRows, int CCols)
+
+__global__ void matvec_kernel(const double* A, const double* B, double* C, unsigned ACols, unsigned BCols) 
 {
 	double CValue = 0;
 
 	int Row = blockIdx.y * TILE_DIM + threadIdx.y;
 	int Col = blockIdx.x * TILE_DIM + threadIdx.x;
 
-	__shared__ float sd_A[TILE_DIM][TILE_DIM];
+	__shared__ float sd_A[TILE_DIM];
 	__shared__ float sd_B[TILE_DIM][TILE_DIM];
 
-	for (int k = 0; k < (TILE_DIM + ACols - 1) / TILE_DIM; k++) {
+	for (int k = 0; k < (TILE_DIM + ACols) / TILE_DIM; k++) {
 
-		if (k*TILE_DIM + threadIdx.x < ACols && Row < ARows)
+		if (k*TILE_DIM + threadIdx.x < ACols && Row == 0)
 		{
-			sd_A[threadIdx.y][threadIdx.x] = A[Row * ACols + k*TILE_DIM + threadIdx.x];
+			sd_A[threadIdx.x] = A[k * TILE_DIM + threadIdx.x];
 		}
 		else {
-			sd_A[threadIdx.y][threadIdx.x] = 0.0;
+			//sd_A[threadIdx.x] = 0.0;
 		}
 
-		if (k * TILE_DIM + threadIdx.y < BRows && Col < BCols) {
+		if (k * TILE_DIM + threadIdx.y < ACols && Col < BCols) {
 			sd_B[threadIdx.y][threadIdx.x] = B[(k * TILE_DIM + threadIdx.y) * BCols + Col];
 		}
 		else {
-			sd_B[threadIdx.y][threadIdx.x] = 0.0;
+			//sd_B[threadIdx.y][threadIdx.x] = 0.0;
 		}
 
 		__syncthreads();
 
 		for (int n = 0; n < TILE_DIM; ++n) {
-			CValue += sd_A[threadIdx.y][n] * sd_B[n][threadIdx.x];
+			CValue += sd_A[n] * sd_B[n][threadIdx.x];
 		}
 
 		__syncthreads();
+		sd_A[threadIdx.x] = 0.0;
+		sd_B[threadIdx.y][threadIdx.x] = 0.0;
+		__syncthreads();
 	}
 
-	if (Row < CRows && Col < CCols)
+	if (Row < 1 && Col < BCols)
 	{
-		C[((blockIdx.y * blockDim.y + threadIdx.y)*CCols) + (blockIdx.x*blockDim.x) + threadIdx.x] = cuda_activationFunc(CValue);
+		C[((blockIdx.y * blockDim.y + threadIdx.y)) + (blockIdx.x*blockDim.x) + threadIdx.x] = cuda_activationFunc(CValue);
 	}
 }
 
@@ -281,11 +285,15 @@ __global__  void cuda_min_max(double * d_input, double * d_outputMin, double *d_
 
 __global__ void cuda_normalizeWeights(double * d_weights, unsigned sizeW, double min, double max)
 {
+	/*
+	const auto a = -1.0;
+	const auto b = 1.0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
 	if (i < sizeW)
 	{
-		d_weights[i] = (d_weights[i] - min) / (max - min);
+		d_weights[i] = a + (b - a) * (d_weights[i] - min) / (max - min);
 	}
+	*/
 }
 
 //------------------------------------------------------------------------
@@ -295,7 +303,7 @@ __global__ void cuda_normalizeWeights(double * d_weights, unsigned sizeW, double
 double *Layer_GPU::SumDW_GPU() const
 {
 	double *d_sumdw = nullptr;
-	utils::CheckError(cudaMalloc((void**)&d_sumdw, nrInputs * sizeof(double)), __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_sumdw, nrInputs * sizeof(double)), __FILE__, __LINE__);
 	dim3 DimGrid(32, 1, 1);
 	dim3 DimBlock(BLOCK_SIZE, 1, 1);
 
@@ -306,11 +314,10 @@ double *Layer_GPU::SumDW_GPU() const
 
 void Layer_GPU::FeedForward_GPU(const double* d_inputs)
 {
-	dim3 grids(32, 32, 1);
-	dim3 blocks(32, 32, 1);
+	dim3 dim_grid(1);
+	dim3 dim_block(BLOCK_SIZE, BLOCK_SIZE);
 
-	cuda_matmul << < grids, blocks >> > (d_inputs, d_weights, d_activationResult, 1, nrInputs, nrInputs, nrNeurons, 1, nrNeurons);
-	utils::CheckError(cudaGetLastError(), __LINE__);
+	matvec_kernel << <dim_grid, dim_block >> >(d_inputs, d_weights, d_activationResult, nrInputs, nrNeurons);
 }
 
 void Layer_GPU::BackPropagation_GPU(const double *inputs)
@@ -330,10 +337,10 @@ void Layer_GPU::calcGradients_GPU(const double* targetVals)
 	dim3 grids(32, 32, 1);
 	dim3 blocks(32, 32, 1);
 	double *d_targetVals = nullptr;
-	utils::CheckError(cudaMalloc((void**)&d_targetVals, nrInputs * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMemcpy(d_targetVals, targetVals, sizeW * sizeof(double), cudaMemcpyHostToDevice), __LINE__);
-	cuda_gradientsLastLayer << < grids, blocks >> > (d_targetVals, d_activationResult, d_gradients, nrNeurons);
-	utils::CheckError(cudaGetLastError(), __LINE__);
+	utils::CheckError(cudaMalloc((void**)&d_targetVals, nrInputs * sizeof(double)), __FILE__, __LINE__);
+	//utils::CheckError(cudaMemcpy(d_targetVals, targetVals, sizeW * sizeof(double), cudaMemcpyHostToDevice), __FILE__, __LINE__);
+	cuda_gradientsLastLayer << < grids, blocks >> > (targetVals, d_activationResult, d_gradients, nrNeurons);
+	utils::CheckError(cudaGetLastError(), __FILE__, __LINE__);
 }
 
 //calculate the gradients for the hidden layer
@@ -342,7 +349,7 @@ void Layer_GPU::calcGradients_GPU(const std::shared_ptr<Layer_GPU> &prevLayer)
 	dim3 grids(32, 32, 1);
 	dim3 blocks(32, 32, 1);
 	cuda_gradients << < grids, blocks >> > (prevLayer->SumDW_GPU(), d_activationResult, d_gradients, nrNeurons);
-	utils::CheckError(cudaGetLastError(), __LINE__);
+	utils::CheckError(cudaGetLastError(), __FILE__, __LINE__);
 }
 
 void Layer_GPU::UpdateWeights_GPU()
@@ -350,7 +357,7 @@ void Layer_GPU::UpdateWeights_GPU()
 	dim3 grids(std::ceil(sizeW / 256.0), 1, 1);
 	dim3 blocks(512, 1, 1);
 	cuda_updateWeights << <grids, blocks >> > (d_weights, d_deltaWeights, d_activationResult, d_gradients, sizeW, nrNeurons, trainRate, momentum);
-	utils::CheckError(cudaGetLastError(), __LINE__);
+	utils::CheckError(cudaGetLastError(), __FILE__, __LINE__);
 
 	if (sizeW > 1) {
 		unsigned numOutputElements = sizeW / (BLOCK_SIZE << 1);
@@ -360,8 +367,8 @@ void Layer_GPU::UpdateWeights_GPU()
 		}
 		double *d_outputMin = nullptr;
 		double *d_outputMax = nullptr;
-		utils::CheckError(cudaMalloc((void**)&d_outputMin, numOutputElements * sizeof(double)), __LINE__);
-		utils::CheckError(cudaMalloc((void**)&d_outputMax, numOutputElements * sizeof(double)), __LINE__);
+		utils::CheckError(cudaMalloc((void**)&d_outputMin, numOutputElements * sizeof(double)), __FILE__, __LINE__);
+		utils::CheckError(cudaMalloc((void**)&d_outputMax, numOutputElements * sizeof(double)), __FILE__, __LINE__);
 
 		dim3 DimGrid(numOutputElements, 1, 1);
 		dim3 DimBlock(BLOCK_SIZE, 1, 1);
@@ -370,8 +377,8 @@ void Layer_GPU::UpdateWeights_GPU()
 
 		double * outputMin = new double[numOutputElements];
 		double * outputMax = new double[numOutputElements];
-		utils::CheckError(cudaMemcpy(outputMin, d_outputMin, numOutputElements * sizeof(double), cudaMemcpyDeviceToHost), __LINE__);
-		utils::CheckError(cudaMemcpy(outputMax, d_outputMax, numOutputElements * sizeof(double), cudaMemcpyDeviceToHost), __LINE__);
+		utils::CheckError(cudaMemcpy(outputMin, d_outputMin, numOutputElements * sizeof(double), cudaMemcpyDeviceToHost), __FILE__, __LINE__);
+		utils::CheckError(cudaMemcpy(outputMax, d_outputMax, numOutputElements * sizeof(double), cudaMemcpyDeviceToHost), __FILE__, __LINE__);
 
 		double min = outputMin[0];
 		double max = outputMax[0];
@@ -388,7 +395,7 @@ void Layer_GPU::UpdateWeights_GPU()
 		}
 
 		cuda_normalizeWeights << <grids, blocks >> > (d_weights, sizeW, min, max);
-		utils::CheckError(cudaGetLastError(), __LINE__);
+		utils::CheckError(cudaGetLastError(), __FILE__, __LINE__);
 
 		cudaFree(d_outputMin);
 		cudaFree(d_outputMax);

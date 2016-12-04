@@ -56,7 +56,7 @@ private:
 	void calcGradients(const std::shared_ptr<Layer> &prevLayer);
 
 	double *matmul(const double *inputs) const;
-	void normalizeWeights();
+	void normalizeWeights() const;
 	std::tuple<double, double> min_max() const;
 	void initDeltaWeights();
 

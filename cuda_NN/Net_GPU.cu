@@ -62,6 +62,37 @@ Net_GPU::Net_GPU() : trainRate(0.1), momentum(0.1), error(0)
 
 }
 
+Net_GPU::~Net_GPU()
+{
+	for (auto i = 0; i < nrInputs; ++i)
+	{
+		cudaFree(inputs[i]);
+		cudaFree(targets[i]);
+	}
+	delete[] inputs;
+	delete[] targets;
+}
+
+
+void Net_GPU::InitInputs(double **inputs, double **targets, unsigned n, unsigned inputSize, unsigned targetSize)
+{
+	nrInputs = n;
+	this->inputSize = inputSize;
+	this->targetSize = targetSize;
+
+	this->inputs = new double*[nrInputs];
+	this->targets = new double*[nrInputs];
+
+	for (auto i = 0; i < nrInputs; ++i)
+	{
+		utils::CheckError(cudaMalloc((void**)&this->inputs[i], inputSize * sizeof(double)), __FILE__, __LINE__);
+		utils::CheckError(cudaMalloc((void**)&this->targets[i], targetSize * sizeof(double)), __FILE__, __LINE__);
+
+		utils::CheckError(cudaMemcpy(this->inputs[i], inputs[i], inputSize * sizeof(double), cudaMemcpyHostToDevice), __FILE__, __LINE__);
+		utils::CheckError(cudaMemcpy(this->targets[i], targets[i], targetSize * sizeof(double), cudaMemcpyHostToDevice), __FILE__, __LINE__);
+	}
+}
+
 void Net_GPU::AddLayer(std::shared_ptr<Layer_GPU> layer)
 {
 	layers.push_back(layer);
@@ -85,17 +116,14 @@ void Net_GPU::SetMomentum(double momentum)
 	}
 }
 
-const double* Net_GPU::feedForward_GPU(const double* inputs)
+const double* Net_GPU::feedForward_GPU(const double* d_inputs)
 {
 	//get the first layer from the list and feed the input into it
 	auto i = 0;
 	auto firstLayer = layers.at(i++);
-	double *d_inputs = nullptr;
-	utils::CheckError(cudaMalloc((void**)&d_inputs, 1 * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMemcpy(d_inputs, inputs, 1 * sizeof(double), cudaMemcpyHostToDevice), __LINE__);
 	firstLayer->FeedForward_GPU(d_inputs);
 	const auto* output = firstLayer->Output_GPU();
-	utils::CheckError(cudaMalloc((void**)&d_inputs, 1 * sizeof(double)), __LINE__);
+
 	//let the data flow through the net
 	for (; i < layers.size(); ++i)
 	{
@@ -122,21 +150,20 @@ void Net_GPU::backPropagate_GPU(const double* targets)
 	}
 }
 
-void Net_GPU::Train_GPU(const double* inputs, const double* targets)
+void Net_GPU::Train_GPU(unsigned inputPos)
 {
 	//let the input flow throught the net
-	const double *output = feedForward_GPU(inputs);
-	error = errorFunc(output, targets, layers.at(layers.size() - 1)->OutputSize());
+	const double *output = feedForward_GPU(inputs[inputPos]);
+	error = errorFunc(output, targets[inputPos], layers.at(layers.size() - 1)->OutputSize());
 
 	//backpropagate the calculated result
-	backPropagate_GPU(targets);
+	backPropagate_GPU(targets[inputPos]);
 
 	//update weights
 	for (auto& layer : layers)
 	{
 		layer->UpdateWeights_GPU();
 	}
-
 }
 
 const double* Net_GPU::Activate_GPU(const double *inputs)
@@ -149,8 +176,12 @@ double Net_GPU::GetError() const
 	return error;
 }
 
-double Net_GPU::errorFunc(const double* d_outputs, const double* targets, unsigned size)
+double Net_GPU::errorFunc(const double* d_outputs, const double* d_targets, unsigned size)
 {
+	double *activ = new double[10];
+	utils::CheckError(cudaMemcpy(activ, d_outputs, 10 * sizeof(double), cudaMemcpyDeviceToHost), __FILE__, __LINE__);
+	//utils::PrintMatrix(activ, 1, 10);
+
 	auto numOutputElements = size / (BLOCK_SIZE << 1);
 	if (size % (BLOCK_SIZE << 1))
 	{
@@ -159,29 +190,24 @@ double Net_GPU::errorFunc(const double* d_outputs, const double* targets, unsign
 
 	auto *res = new double[size];
 	double *d_res = nullptr;
-	double *d_targets = nullptr;
 
-	utils::CheckError(cudaMalloc((void **)&d_targets, size * sizeof(double)), __LINE__);
-	utils::CheckError(cudaMalloc((void **)&d_res, numOutputElements * sizeof(double)), __LINE__);
-
-	cudaMemcpy(d_targets, targets, size * sizeof(float), cudaMemcpyHostToDevice);
+	utils::CheckError(cudaMalloc((void **)&d_res, numOutputElements * sizeof(double)), __FILE__, __LINE__);
 
 	dim3 DimGrid(numOutputElements, 1, 1);
 	dim3 DimBlock(BLOCK_SIZE, 1, 1);
 
 	cuda_errorFunc << <DimGrid, DimBlock >> >(d_outputs, d_targets, d_res, size);
 
-	cudaMemcpy(res, d_res, numOutputElements * sizeof(double), cudaMemcpyDeviceToHost);
+	utils::CheckError(cudaMemcpy(res, d_res, numOutputElements * sizeof(double), cudaMemcpyDeviceToHost), __FILE__, __LINE__);
 
 	for (int i = 1; i < numOutputElements; i++)
 	{
 		res[0] += res[i];
 	}
 
-	error = res[0];
+	auto error = res[0];
 
 	cudaFree(d_res);
-	cudaFree(d_targets);
 	delete[] res;
 
 	return error;

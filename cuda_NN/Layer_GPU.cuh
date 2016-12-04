@@ -19,7 +19,7 @@ public:
 	double *SumDW_GPU() const;
 	void UpdateWeights_GPU();
 
-	void FeedForward_GPU(const double * inputs);
+	void FeedForward_GPU(const double * d_inputs);
 	void BackPropagation_GPU(const double *inputs);
 	void BackPropagation_GPU(const std::shared_ptr<Layer_GPU> &prevLayer);
 
