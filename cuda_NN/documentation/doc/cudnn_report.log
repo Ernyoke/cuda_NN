@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.11.22)  4 DEC 2016 20:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.11.22)  27 JAN 2017 22:47
 entering extended mode
 **./cudnn_report.tex
 (cudnn_report.tex
@@ -326,43 +326,261 @@ Package: ccaption 2011/08/07 v3.2c Extended captioning and new floats
 \belowlegendskip=\skip59
 \c@newflo@tctr=\count103
 )
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\biblatex.sty"
+Package: biblatex 2016/09/17 v3.6 programmable bibliographies (PK/JW/AB)
+
+("C:\Program Files\MikTex 2.9\tex\latex\etoolbox\etoolbox.sty"
+Package: etoolbox 2016/12/01 v2.2b e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count104
+)
+("C:\Program Files\MikTex 2.9\tex\latex\logreq\logreq.sty"
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count105
+
+("C:\Program Files\MikTex 2.9\tex\latex\logreq\logreq.def"
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+("C:\Program Files\MikTex 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Program Files\MikTex 2.9\tex\latex\xstring\xstring.sty"
+("C:\Program Files\MikTex 2.9\tex\generic\xstring\xstring.tex"
+\@xs@message=\write3
+\integerpart=\count106
+\decimalpart=\count107
+)
+Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
+)
+\c@tabx@nest=\count108
+\c@listtotal=\count109
+\c@listcount=\count110
+\c@liststart=\count111
+\c@liststop=\count112
+\c@citecount=\count113
+\c@citetotal=\count114
+\c@multicitecount=\count115
+\c@multicitetotal=\count116
+\c@instcount=\count117
+\c@maxnames=\count118
+\c@minnames=\count119
+\c@maxitems=\count120
+\c@minitems=\count121
+\c@citecounter=\count122
+\c@savedcitecounter=\count123
+\c@uniquelist=\count124
+\c@uniquename=\count125
+\c@refsection=\count126
+\c@refsegment=\count127
+\c@maxextratitle=\count128
+\c@maxextratitleyear=\count129
+\c@maxextrayear=\count130
+\c@maxextraalpha=\count131
+\c@abbrvpenalty=\count132
+\c@highnamepenalty=\count133
+\c@lownamepenalty=\count134
+\c@maxparens=\count135
+\c@parenlevel=\count136
+\blx@tempcnta=\count137
+\blx@tempcntb=\count138
+\blx@tempcntc=\count139
+\blx@maxsection=\count140
+\blx@maxsegment@0=\count141
+\blx@notetype=\count142
+\blx@parenlevel@text=\count143
+\blx@parenlevel@foot=\count144
+\blx@sectionciteorder@0=\count145
+\labelnumberwidth=\skip60
+\labelalphawidth=\skip61
+\biblabelsep=\skip62
+\bibitemsep=\skip63
+\bibnamesep=\skip64
+\bibinitsep=\skip65
+\bibparsep=\skip66
+\bibhang=\skip67
+\blx@bcfin=\read1
+\blx@bcfout=\write4
+\c@mincomprange=\count146
+\c@maxcomprange=\count147
+\c@mincompwidth=\count148
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\blx-dm.def")
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count149
+\c@savedafterword=\count150
+\c@annotator=\count151
+\c@savedannotator=\count152
+\c@author=\count153
+\c@savedauthor=\count154
+\c@bookauthor=\count155
+\c@savedbookauthor=\count156
+\c@commentator=\count157
+\c@savedcommentator=\count158
+\c@editor=\count159
+\c@savededitor=\count160
+\c@editora=\count161
+\c@savededitora=\count162
+\c@editorb=\count163
+\c@savededitorb=\count164
+\c@editorc=\count165
+\c@savededitorc=\count166
+\c@foreword=\count167
+\c@savedforeword=\count168
+\c@holder=\count169
+\c@savedholder=\count170
+\c@introduction=\count171
+\c@savedintroduction=\count172
+\c@namea=\count173
+\c@savednamea=\count174
+\c@nameb=\count175
+\c@savednameb=\count176
+\c@namec=\count177
+\c@savednamec=\count178
+\c@translator=\count179
+\c@savedtranslator=\count180
+\c@shortauthor=\count181
+\c@savedshortauthor=\count182
+\c@shorteditor=\count183
+\c@savedshorteditor=\count184
+\c@labelname=\count185
+\c@savedlabelname=\count186
+\c@institution=\count187
+\c@savedinstitution=\count188
+\c@lista=\count189
+\c@savedlista=\count190
+\c@listb=\count191
+\c@savedlistb=\count192
+\c@listc=\count193
+\c@savedlistc=\count194
+\c@listd=\count195
+\c@savedlistd=\count196
+\c@liste=\count197
+\c@savedliste=\count198
+\c@listf=\count199
+\c@savedlistf=\count266
+\c@location=\count267
+\c@savedlocation=\count268
+\c@organization=\count269
+\c@savedorganization=\count270
+\c@origlocation=\count271
+\c@savedoriglocation=\count272
+\c@origpublisher=\count273
+\c@savedorigpublisher=\count274
+\c@publisher=\count275
+\c@savedpublisher=\count276
+\c@language=\count277
+\c@savedlanguage=\count278
+\c@pageref=\count279
+\c@savedpageref=\count280
+\shorthandwidth=\skip68
+\shortjournalwidth=\skip69
+\shortserieswidth=\skip70
+\shorttitlewidth=\skip71
+\shortauthorwidth=\skip72
+\shorteditorwidth=\skip73
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\blx-compat.def"
+File: blx-compat.def 2016/09/17 v3.6 biblatex compatibility (PK/JW/AB)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\biblatex.def"
+File: biblatex.def 2016/09/17 v3.6 biblatex compatibility (PK/JW/AB)
+\c@textcitecount=\count281
+\c@textcitetotal=\count282
+\c@textcitemaxnames=\count283
+\c@biburlnumpenalty=\count284
+\c@biburlucpenalty=\count285
+\c@biburllcpenalty=\count286
+\c@smartand=\count287
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\bbx\numeric.bbx"
+File: numeric.bbx 2016/09/17 v3.6 biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\bbx\standard.bbx"
+File: standard.bbx 2016/09/17 v3.6 biblatex bibliography style (PK/JW/AB)
+\c@bbx:relatedcount=\count288
+\c@bbx:relatedtotal=\count289
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\cbx\numeric.cbx"
+File: numeric.cbx 2016/09/17 v3.6 biblatex citation style (PK/JW/AB)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\biblatex.cfg"
+File: biblatex.cfg 
+))
 ("C:\Program Files\MikTex 2.9\tex\latex\koma-script\scrpage2.sty"
 Package: scrpage2 2016/06/14 v3.21 KOMA-Script package (page head and foot)
 LaTeX Info: Redefining \pagemark on input line 174.
 )
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+("C:\Program Files\MikTex 2.9\tex\latex\biblatex\lbx\english.lbx"
+File: english.lbx 2016/09/17 v3.6 biblatex localization (PK/JW/AB)
+)
+\@quotelevel=\count290
+\@quotereset=\count291
+
 (cudnn_report.aux)
 \openout1 = `cudnn_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 90.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 93.
  ("C:\Program Files\MikTex 2.9\tex\latex\psnfss\t1ptm.fd"
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 ("C:\Program Files\MikTex 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
+\scratchcounter=\count292
 \scratchdimen=\dimen124
 \scratchbox=\box28
-\nofMPsegments=\count105
-\nofMParguments=\count106
+\nofMPsegments=\count293
+\nofMParguments=\count294
 \everyMPshowfont=\toks17
-\MPscratchCnt=\count107
+\MPscratchCnt=\count295
 \MPscratchDim=\dimen125
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
+\MPnumerator=\count296
+\makeMPintoPDFobject=\count297
 \everyMPtoPDFconversion=\toks18
 ) ("C:\Program Files\MikTex 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -380,7 +598,7 @@ G,.JBIG2,.JB2,.eps]
 \AtBeginShipoutBox=\box29
 
 ABD: EveryShipout initializing macros
-Package hyperref Info: Link coloring OFF on input line 90.
+Package hyperref Info: Link coloring OFF on input line 93.
 
 ("C:\Program Files\MikTex 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -388,16 +606,26 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files\MikTex 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count110
+\c@section@level=\count298
 )
-LaTeX Info: Redefining \ref on input line 90.
-LaTeX Info: Redefining \pageref on input line 90.
-LaTeX Info: Redefining \nameref on input line 90.
+LaTeX Info: Redefining \ref on input line 93.
+LaTeX Info: Redefining \pageref on input line 93.
+LaTeX Info: Redefining \nameref on input line 93.
 
 (cudnn_report.out) (cudnn_report.out)
-\@outlinefile=\write3
-\openout3 = `cudnn_report.out'.
+\@outlinefile=\write5
+\openout5 = `cudnn_report.out'.
 
+Package biblatex Info: Input encoding 'latin1' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'latin1'.
+\openout4 = `cudnn_report.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'cudnn_report.bbl' found.
+ (cudnn_report.bbl)
+Package biblatex Info: Reference section=0 on input line 93.
+Package biblatex Info: Reference segment=0 on input line 93.
 
 
 Package scrpage2 Warning: seems you are using a very small headheight.
@@ -407,26 +635,26 @@ Package scrpage2 Warning: seems you are using a very small headheight.
 (scrpage2)                into the preamble of your document.
 (scrpage2)                A better solution would be to use typearea package.
 
-LaTeX Font Info:    Try loading font information for T1+phv on input line 126.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 129.
 ("C:\Program Files\MikTex 2.9\tex\latex\psnfss\t1phv.fd"
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 ) [1
 
 {C:/Users/ervin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 133.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 136.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 133.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 136.
  (cudnn_report.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 2.
+(Font)              <12> on input line 5.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 2.
+(Font)              <8> on input line 5.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 2.
+(Font)              <6> on input line 5.
 )
-\tf@toc=\write4
-\openout4 = `cudnn_report.toc'.
+\tf@toc=\write6
+\openout6 = `cudnn_report.toc'.
 
 
 
@@ -436,7 +664,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.135 \newpage
+l.138 \newpage
               
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -455,11 +683,20 @@ To make it work for now, you can use the already also deprecated class option
 
 [2]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 139.
- <fcnn.jpg, id=84, 591.20876pt x 467.7475pt>
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 142.
+
+
+LaTeX Warning: Citation 'wiki_neural' on page 3 undefined on input line 143.
+
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 143.
+
+LaTeX Warning: Citation 'wiki_neural' on page 3 undefined on input line 144.
+
+<fcnn.jpg, id=84, 591.20876pt x 467.7475pt>
 File: fcnn.jpg Graphic file (type jpg)
  <use fcnn.jpg>
-Package pdftex.def Info: fcnn.jpg used on input line 154.
+Package pdftex.def Info: fcnn.jpg used on input line 157.
 (pdftex.def)             Requested size: 284.52756pt x 225.11577pt.
 
 
@@ -469,7 +706,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.156 	\caption{Fully-connected neural net.}
+l.159 	\caption{Fully-connected neural net.}
                                             
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -486,12 +723,10 @@ you should replace it, e.g., by `\normalfont \bfseries '.
 To make it work for now, you can use the already also deprecated class option
 `enabledeprecatedfontcommands'.
 
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 156.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 156.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 159.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 156.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 159.
 
 ! Class scrartcl Error: undefined old font command `\bf'.
 
@@ -499,7 +734,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.156 	\caption{Fully-connected neural net.}
+l.159 	\caption{Fully-connected neural net.}
                                             
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -519,7 +754,7 @@ To make it work for now, you can use the already also deprecated class option
 <neuron.png, id=85, 602.25pt x 286.06876pt>
 File: neuron.png Graphic file (type png)
  <use neuron.png>
-Package pdftex.def Info: neuron.png used on input line 162.
+Package pdftex.def Info: neuron.png used on input line 165.
 (pdftex.def)             Requested size: 284.52756pt x 135.1551pt.
 
 
@@ -529,7 +764,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.164 	\caption{Neuron.}
+l.167 	\caption{Neuron.}
                         
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -553,7 +788,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.164 	\caption{Neuron.}
+l.167 	\caption{Neuron.}
                         
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -571,13 +806,22 @@ To make it work for now, you can use the already also deprecated class option
 `enabledeprecatedfontcommands'.
 
 
+LaTeX Warning: Citation 'cudnn' on page 3 undefined on input line 175.
+
+
+LaTeX Warning: Citation 'tensorflow' on page 3 undefined on input line 175.
+
+
+LaTeX Warning: Citation 'caffe' on page 3 undefined on input line 175.
+
+
 ! Class scrartcl Error: undefined old font command `\it'.
 
 See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.174 \subsection
+l.177 \subsection
                  {Serial implementation}
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -595,17 +839,17 @@ To make it work for now, you can use the already also deprecated class option
 `enabledeprecatedfontcommands'.
 
 [3]
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 178.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 181.
  ("C:\Program Files\MikTex 2.9\tex\latex\psnfss\t1pcr.fd"
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Overfull \hbox (35.34439pt too wide) in paragraph at lines 194--194
+Overfull \hbox (35.34439pt too wide) in paragraph at lines 197--197
 []\T1/pcr/m/n/12 Parameter: Layers (vector of layers), Neuron (vector of neuron
 s[] 
  []
 
 
-Overfull \hbox (28.1444pt too wide) in paragraph at lines 194--194
+Overfull \hbox (28.1444pt too wide) in paragraph at lines 197--197
 []\T1/pcr/m/n/12 in each layer), Inputs(vector of inputs), IN(number of inputs)
 [] 
  []
@@ -617,7 +861,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.194 \end{verbatim}
+l.197 \end{verbatim}
                     
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -635,19 +879,19 @@ To make it work for now, you can use the already also deprecated class option
 `enabledeprecatedfontcommands'.
 
 [4 <./fcnn.jpg> <./neuron.png>]
-Overfull \hbox (35.34439pt too wide) in paragraph at lines 214--214
+Overfull \hbox (35.34439pt too wide) in paragraph at lines 217--217
 []\T1/pcr/m/n/12 Parameter: Layers (vector of layers), Neuron (vector of neuron
 s[] 
  []
 
 
-Overfull \hbox (49.74438pt too wide) in paragraph at lines 214--214
+Overfull \hbox (49.74438pt too wide) in paragraph at lines 217--217
 []\T1/pcr/m/n/12 in each layer), Outputs(vector of outputs), ON(number of outpu
 ts)[] 
  []
 
 
-Overfull \hbox (49.74438pt too wide) in paragraph at lines 224--224
+Overfull \hbox (49.74438pt too wide) in paragraph at lines 227--227
 []\T1/pcr/m/n/12 Parameter: myNeuronIdx (the neuron for which we compute the de
 lta[] 
  []
@@ -659,7 +903,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.235 ...i_{2} & ... & i_{N} \end{array} \right)\]
+l.238 ...i_{2} & ... & i_{N} \end{array} \right)\]
                                                   
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -677,7 +921,7 @@ To make it work for now, you can use the already also deprecated class option
 `enabledeprecatedfontcommands'.
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 243--246
+Underfull \hbox (badness 10000) in paragraph at lines 246--249
 
  []
 
@@ -688,7 +932,7 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.253 
+l.256 
       
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -706,7 +950,8 @@ To make it work for now, you can use the already also deprecated class option
 `enabledeprecatedfontcommands'.
 
 [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 267.
+
+LaTeX Warning: Citation 'mnist' on page 7 undefined on input line 265.
 
 
 ! Class scrartcl Error: undefined old font command `\it'.
@@ -715,7 +960,93 @@ See the scrartcl class documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.267 \end{document}
+l.266 
+      
+You should note that since 1994 LaTeX2e provides a new font selection scheme
+called NFSS2 with several new, combinable font commands. New KOMA-Script
+classes have defined the old font commands like `\it' only for compatibility
+with old LaTeX 2.09 document styles of Script 2.0. Nevertheless, these
+commands are deprecated and undocumented at least since 2003. Since 2013
+KOMA-Script classes warn abouts soon removement of these deprecated commands.
+Now, after two decades of LaTeX2e and NFSS2, these commands will not work any
+more. If loading a package results in this error message, you should contact
+the author of that package and ask him to replace the deprecated font command
+`\it', e.g., by `\normalfont \itshape `. Otherwise you should reconfigure
+or replace the package. If you have used the old font command `\it' yourself,
+you should replace it, e.g., by `\normalfont \itshape '.
+To make it work for now, you can use the already also deprecated class option
+`enabledeprecatedfontcommands'.
+
+[7] <chart.png, id=121, 635.37375pt x 335.00156pt>
+File: chart.png Graphic file (type png)
+ <use chart.png>
+Package pdftex.def Info: chart.png used on input line 282.
+(pdftex.def)             Requested size: 426.79134pt x 225.03261pt.
+
+Overfull \hbox (8.53592pt too wide) in paragraph at lines 282--283
+ [] 
+ []
+
+
+! Class scrartcl Error: undefined old font command `\bf'.
+
+See the scrartcl class documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.284 	\caption{CPU-GPU speed comparison}
+                                         
+You should note that since 1994 LaTeX2e provides a new font selection scheme
+called NFSS2 with several new, combinable font commands. New KOMA-Script
+classes have defined the old font commands like `\bf' only for compatibility
+with old LaTeX 2.09 document styles of Script 2.0. Nevertheless, these
+commands are deprecated and undocumented at least since 2003. Since 2013
+KOMA-Script classes warn abouts soon removement of these deprecated commands.
+Now, after two decades of LaTeX2e and NFSS2, these commands will not work any
+more. If loading a package results in this error message, you should contact
+the author of that package and ask him to replace the deprecated font command
+`\bf', e.g., by `\normalfont \bfseries `. Otherwise you should reconfigure
+or replace the package. If you have used the old font command `\bf' yourself,
+you should replace it, e.g., by `\normalfont \bfseries '.
+To make it work for now, you can use the already also deprecated class option
+`enabledeprecatedfontcommands'.
+
+
+! Class scrartcl Error: undefined old font command `\bf'.
+
+See the scrartcl class documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.284 	\caption{CPU-GPU speed comparison}
+                                         
+You should note that since 1994 LaTeX2e provides a new font selection scheme
+called NFSS2 with several new, combinable font commands. New KOMA-Script
+classes have defined the old font commands like `\bf' only for compatibility
+with old LaTeX 2.09 document styles of Script 2.0. Nevertheless, these
+commands are deprecated and undocumented at least since 2003. Since 2013
+KOMA-Script classes warn abouts soon removement of these deprecated commands.
+Now, after two decades of LaTeX2e and NFSS2, these commands will not work any
+more. If loading a package results in this error message, you should contact
+the author of that package and ask him to replace the deprecated font command
+`\bf', e.g., by `\normalfont \bfseries `. Otherwise you should reconfigure
+or replace the package. If you have used the old font command `\bf' yourself,
+you should replace it, e.g., by `\normalfont \bfseries '.
+To make it work for now, you can use the already also deprecated class option
+`enabledeprecatedfontcommands'.
+
+
+LaTeX Warning: Empty bibliography on input line 296.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 298.
+
+! Class scrartcl Error: undefined old font command `\it'.
+
+See the scrartcl class documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.298 \end{document}
                     
 You should note that since 1994 LaTeX2e provides a new font selection scheme
 called NFSS2 with several new, combinable font commands. New KOMA-Script
@@ -732,23 +1063,35 @@ you should replace it, e.g., by `\normalfont \itshape '.
 To make it work for now, you can use the already also deprecated class option
 `enabledeprecatedfontcommands'.
 
-[7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 267.
+[8 <./chart.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 298.
  (cudnn_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 267.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 267.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 298.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 298.
 Package rerunfilecheck Info: File `cudnn_report.out' has not changed.
 (rerunfilecheck)             Checksum: 0A259642749012BDD0A697B7D6DB9B56;900.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 267.
+
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                cudnn_report
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'cudnn_report.run.xml'.
+\openout1 = `cudnn_report.run.xml'.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 298.
  ) 
 Here is how much of TeX's memory you used:
- 7959 strings out of 493333
- 128465 string characters out of 3139193
- 304198 words of memory out of 3000000
- 11360 multiletter control sequences out of 15000+200000
- 39357 words of font info for 48 fonts, out of 3000000 for 9000
+ 14368 strings out of 493333
+ 245400 string characters out of 3139193
+ 782223 words of memory out of 3000000
+ 17708 multiletter control sequences out of 15000+200000
+ 40464 words of font info for 49 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,9n,51p,8825b,449s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 43i,9n,51p,8825b,1065s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MikTex 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 kTex 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MikTex 2.9
 /fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MikTex 2.9/fonts/t
@@ -758,11 +1101,11 @@ ts/cm/cmr8.pfb><C:/Program Files/MikTex 2.9/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb><C:/Program Files/MikTex 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Prog
 ram Files/MikTex 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files/MikT
 ex 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MikTex 2.9/fonts/t
-ype1/urw/times/utmr8a.pfb><C:/Program Files/MikTex 2.9/fonts/type1/urw/times/ut
-mri8a.pfb>
-Output written on cudnn_report.pdf (7 pages, 179919 bytes).
+ype1/urw/times/utmb8a.pfb><C:/Program Files/MikTex 2.9/fonts/type1/urw/times/ut
+mr8a.pfb><C:/Program Files/MikTex 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on cudnn_report.pdf (8 pages, 201626 bytes).
 PDF statistics:
- 164 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
- 115 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 174 PDF objects out of 1000 (max. 8388607)
+ 28 named destinations out of 1000 (max. 500000)
+ 120 words of extra memory for PDF output out of 10000 (max. 10000000)
 

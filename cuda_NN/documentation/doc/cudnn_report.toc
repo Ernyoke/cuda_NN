@@ -1,13 +1,27 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1}Problem description}{3}{subsection.1.1}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2}Fully-connected feed-forward neural MLP net}{3}{subsection.1.2}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2}Solution}{3}{section.2}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1}Related work}{3}{subsection.2.1}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2}Serial implementation}{4}{subsection.2.2}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3}Parallel implementation of the feed-forward step}{6}{subsection.2.3}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4}Parallel implementation of the backpropagation step}{6}{subsection.2.4}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.5}Memory management - Naive approach}{7}{subsection.2.5}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.6}Memory management - Optimized approach}{7}{subsection.2.6}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Benchmarks}{7}{section.3}
-\contentsline {section}{\numberline {4}Conclusion}{7}{section.4}
-\contentsline {section}{\numberline {5}References}{7}{section.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Conclusion}{8}{section.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}References}{8}{section.5}

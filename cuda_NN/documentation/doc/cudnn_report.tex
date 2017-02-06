@@ -47,6 +47,9 @@
 \captiontitlefont{\footnotesize\sffamily} % defines the font of the caption text (same as above, but not bold)
 \setlength{\abovecaptionskip}{0mm} %lowers the distace of captions to the figure
 
+\usepackage{biblatex}
+\bibliography{references.bib}
+
 
 % ********* Header and Footer **********
 % This is something to play with forever. I use here the advanced settings of the KOMA script
@@ -137,8 +140,8 @@ Sapientia EMTE
 \section{Introduction}
 
 \subsection{Problem description}
-Neural networks are a computational approach which is based on a large collection of neural units loosely modeling the way a biological brain. Neural networks are widely used in applications like pattern recognition and computer vision. However there can be found examples of neural net usage in other types of application. Their popularity hugely increased with the release of hardware such as graphical cards which support massive parallelization. In the year of 2007 nVidia first introduced their parallel computing platform and application programming interface named CUDA. This allowed engineers to run data parallel applications using thousands of threads maximizing computation throughput. 
-A neural network is usually represented as interconnected neurons which basically are modeling the axons from a human brain. There are many kinds of neural network models hat have been proposed to solve some real life problems. Feed-forward neural network and Restricted Boltzmann Machine (RBM) are two of the most popular neural network models but the latest years the popularity of deep networks increased significantly.
+Neural networks are a computational approach which is based on a large collection of neural units loosely modeling the way a biological brain. Neural networks are widely used in applications like pattern recognition and computer vision. However there can be found examples of neural net usage in other types of application \cite{wiki_neural}. Their popularity hugely increased with the release of hardware such as graphical cards which support massive parallelization. In the year of 2007 nVidia first introduced their parallel computing platform and application programming interface named CUDA. This allowed engineers to run data parallel applications using thousands of threads maximizing computation throughput. 
+A neural network is usually represented as interconnected neurons which basically are modeling the axons from a human brain\cite{wiki_neural}. There are many kinds of neural network models hat have been proposed to solve some real life problems. Feed-forward neural network and Restricted Boltzmann Machine (RBM) are two of the most popular neural network models but the latest years the popularity of deep networks increased significantly.
 
 \subsection{Fully-connected feed-forward neural MLP net}
 
@@ -169,7 +172,7 @@ y_k = \sum w_i * x_i
 
 \subsection{Related work}
 
-There are several open source libraries for implementing neural networks, most of them are optimized for convolutional neural networks and deep learning networks. Some libraries which can be used are cuDNN by NVidia, tensorflow and Caffe. This are huge libraries focusing mainly on deep learning but they can be used for fully-connected networks as well.
+There are several open source libraries for implementing neural networks, most of them are optimized for convolutional neural networks and deep learning networks. Some libraries which can be used are cuDNN\cite{cudnn} by NVidia, tensorflow\cite{tensorflow} and Caffe\cite{caffe}. This are huge libraries focusing mainly on deep learning but they can be used for fully-connected networks as well.
 
 \subsection{Serial implementation}
 The training of an MLP neural net consists in two basic phases: the feed-forward step when some input is given to the net which should flow through it and by the activation of the neurons some output is generated; the secondary step is the backpropagation step where the generated output is compared to the target output resulting in some kind of an error value. This error is backpropagated through the net calibrating the weights. 
@@ -213,7 +216,7 @@ end for
 	
 \end{verbatim}
 
-For the output layer, the delta values can be calculated by with a subtraction of the output value from the target value in case of every neuron. In case of hidden layers the delta value for every neuron in a layer is calculated by summing up the product of the weights and gradient values of every neuron from the following layer on which it has impact. 
+For the output layer, the delta values can be calculated with a subtraction of the output value from the target value in case of every neuron. In case of hidden layers the delta value for every neuron in a layer is calculated by summing up the product of the weights and gradient values of every neuron from the following layer on which it has impact. 
 
 \begin{verbatim}
 Parameter: myNeuronIdx (the neuron for which we compute the delta
@@ -259,10 +262,38 @@ The optimized approach is to allocate the memory at the beginning in the VRAM an
 We the memory is allocated, the CPU gets a pointer to it. This is very important looking back to the steps of the backpropagation. This way the CPU is the manager of what kernel should run at the specific moment. It also passes as an argument the pointer of the memory location which should be used.
 
 \section{Benchmarks}
+The input data used for benchmarks is the MNIST database\cite{mnist}. This contains 60000 images of handwritten digits. The size of every image is 28x28. 4 different neural nets were used for testing having the following topologies: Net1: layer1 - 128 neurons, layer2 - 128 neurons; Net2: layer1 - 128 neurons, layer2 - 128 neurons, layer3 - 128 neurons; Net3: layer1 - 1024 neurons, layer2 - 1024 neurons; Net4 - layer1 - 1024 neurons, layer2 - 1024 neurons, layer3 - 1024 neurons. Tests were done using the serial implementation and the parallel implementation for every net as well. The CPU used for testing is an intel I7 6700 clocked at 3.4 GHz, the GPU used for testing is an nVidia Geforce GTX1080 with 2560 CUDA cores. For each net the average training iteration time was measured. In an iteration the training of a single image is done. This image data is fed 10 times to the net and then the upcoming image is taken. An epoch is passed when every iteration is finished. The training lasts multiple epochs. The results are displayed in milliseconds and they are the following:
+
+\begin{center}
+\begin{tabular}{| l | l | l | l |}
+\hline
+Net & Topology & CPU & GPU \\
+\hline
+Net1 & 128 - 128 & 15 ms & 16 ms  \\
+Net2 & 128 - 128 - 128 & 18 ms & 15 ms  \\
+Net3 & 1024 - 1024 & 150 ms & 38 ms  \\
+Net4 & 1024 - 1024 - 1024 & 615 ms & 72 ms  \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[width=15cm]{chart.png}
+	\end{center}
+	\caption{CPU-GPU speed comparison}
+	\label{fig:chart}
+\end{figure}
+
+We can observe that the CPU has the faster times when then net is relatively small. Also it take a considerable advantage when the number of serial operations increase, having more layers for which to calculate the outputs. The GPU takes serious advantage when the number of neurons increase. Having more neurons increases the number of the parallel operations, reaching a speed-up of 8.54 at the last net. As the numbers of neurons increase per layer, the more effective the parallel algorithm is.  
 
 \section{Conclusion}
 
+I conclusion we can state that we were able to give a parallel implementation for the MLP neural net. We were able to optimize the given solution in an way to avoid data transfers between the RAM and the VRAM in the training process. Also we have demonstrated that the GPU takes a serious lead when dealing with data parallelism compared to the CPU. 
+
 \section{References}
+
+\printbibliography
 
 \end{document}
 
